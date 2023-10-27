@@ -21,9 +21,9 @@ public class DigimonController {
 
     private DigimonService digimonService;
 
-    @GetMapping()
+     @GetMapping()
     public List<DigimonDTO> getAllDigimons() {
-        return digimonService.listarDigmon();
-
+        return digimonService.listarDigmonPorNome();
     }
+
 }

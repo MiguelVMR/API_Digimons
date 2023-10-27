@@ -1,6 +1,7 @@
 package com.digimon.digimon.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -14,15 +15,21 @@ import lombok.AllArgsConstructor;
 public class DigimonService {
 
     private HttpClient client;
-
-    public List<DigimonDTO> listarDigmon() {
+// Método para listar Digimons ordenados por nome em ordem alfabética
+    public List<DigimonDTO> listarDigmonPorNome() {
+        // Obtém a lista de Digimons da API
         List<DigimonDTO> digimonDTO = this.client.listar();
 
+        /*  Ordena os Digimons por nome em ordem alfabética usando streams
+         Utiliza o método sorted() com um comparador lambda que compara os nomes dos Digimons (name)
+         O método compareTo() é usado para determinar a ordem alfabética dos nomes*/
+         
+        List<DigimonDTO> digimonsOrdenados = digimonDTO.stream()
+                .sorted((digimon1, digimon2) -> digimon1.getName().compareTo(digimon2.getName())) 
+                .collect(Collectors.toList()); // Coleta o resultado de volta em uma lista
 
-        
-        System.out.println(digimonDTO);
-        return digimonDTO;
-
+        System.out.println(digimonsOrdenados);
+        return digimonsOrdenados;
     }
 
 }
