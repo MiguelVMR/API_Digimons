@@ -20,15 +20,25 @@ import lombok.Data;
 @Data
 public class HttpClient {
 	
+
+/**
+ * Este método utiliza o RestTemplate para fazer uma requisição GET à API de Digimons
+ * obtendo uma lista de DigimonDTOs em formato JSON.
+ * Após receber a resposta da API, converte o JSON para um array de DigimonDTOs e retorna uma lista
+ * desses DigimonDTOs encapsulados em uma List.
+ */
     public List<DigimonDTO> listar() {
 		RestTemplate restTemplate = new RestTemplate();
 		
+		// Cria uma requisição GET para a API de Digimons
 		RequestEntity<Void> request = RequestEntity
 				.get(URI.create("https://digimon-api.vercel.app/api/digimon"))
-				.header("Authorization", "Basic YWxnYXdvcmtzOnMzbmg0")	.build();
+				.build();
 		
+		// Envia a requisição e recebe a resposta da API como um array de DigimonDTOs
 		ResponseEntity<DigimonDTO[]> response = restTemplate.exchange(request, DigimonDTO[].class);
 		
+		// Converte o array de DigimonDTOs em uma lista e retorna
 		return Arrays.asList(response.getBody());
 	}
 }

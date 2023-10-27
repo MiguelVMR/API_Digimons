@@ -29,7 +29,7 @@ public class DigimonService {
                 .sorted((digimon1, digimon2) -> digimon1.getName().compareTo(digimon2.getName())) 
                 .collect(Collectors.toList()); // Coleta o resultado de volta em uma lista
 
-        System.out.println(digimonsOrdenados);
+                
         return digimonsOrdenados;
     }
 
