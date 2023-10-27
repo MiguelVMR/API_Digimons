@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digimon.digimon.dtos.DigimonDTO;
@@ -24,6 +25,12 @@ public class DigimonController {
      @GetMapping()
     public List<DigimonDTO> getAllDigimons() {
         return digimonService.listarDigmonPorNome();
+    }
+
+    
+    @GetMapping("/byLevel")
+    public List<DigimonDTO> getDigimonsByLevel(@RequestParam(value = "level") String level) {
+        return digimonService.listarDigimonPorLevel(level);
     }
 
 }

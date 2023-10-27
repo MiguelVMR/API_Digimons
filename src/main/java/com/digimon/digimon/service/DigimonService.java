@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 public class DigimonService {
 
     private HttpClient client;
+
 // Método para listar Digimons ordenados por nome em ordem alfabética
     public List<DigimonDTO> listarDigmonPorNome() {
         // Obtém a lista de Digimons da API
@@ -23,13 +24,26 @@ public class DigimonService {
         /*  Ordena os Digimons por nome em ordem alfabética usando streams
          Utiliza o método sorted() com um comparador lambda que compara os nomes dos Digimons (name)
          O método compareTo() é usado para determinar a ordem alfabética dos nomes*/
-         
+
         List<DigimonDTO> digimonsOrdenados = digimonDTO.stream()
                 .sorted((digimon1, digimon2) -> digimon1.getName().compareTo(digimon2.getName())) 
                 .collect(Collectors.toList()); // Coleta o resultado de volta em uma lista
 
         System.out.println(digimonsOrdenados);
         return digimonsOrdenados;
+    }
+
+    public List<DigimonDTO> listarDigimonPorLevel(String level) {
+        
+        List<DigimonDTO> digimonDTO = this.client.listar();
+
+        // Filtra os Digimons com base no level fornecido
+        List<DigimonDTO> digimonsFiltrados = digimonDTO.stream()
+                .filter(digimon -> digimon.getLevel().equalsIgnoreCase(level))
+                .collect(Collectors.toList());
+
+        // Retorna a lista de Digimons filtrados por level
+        return digimonsFiltrados;
     }
 
 }
