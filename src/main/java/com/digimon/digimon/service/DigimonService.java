@@ -33,6 +33,15 @@ public class DigimonService {
         return digimonsOrdenados;
     }
 
+
+/**
+ * Lista os Digimons filtrados pelo nível fornecido.
+ * Este método recebe um parâmetro 'level' e filtra a lista de Digimons, 
+ * retornando apenas aqueles com o nível correspondente ao parâmetro fornecido. 
+ * Exemplo de uso:
+ * Para obter Digimons do nível "Rookie", faça uma chamada GET para:/digimons/byLevel?level=Rookie
+ * Isso retornará uma lista de Digimons que têm o nível "Rookie".
+ */
     public List<DigimonDTO> listarDigimonPorLevel(String level) {
         
         List<DigimonDTO> digimonDTO = this.client.listar();
